@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Aplicacion</string>
+    <string name="obtener_contraseña">¿Has olvidado tu contraseña?</string>
+    <string name="ingresar">Aceptar</string>
+    <string name="registrar">O Registrar</string>
+    <string name="password">Contraseña</string>
+    <string name="user">Usuario</string>
 </resources>
