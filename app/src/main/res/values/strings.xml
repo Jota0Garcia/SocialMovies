@@ -9,4 +9,6 @@
     <string name="Correo">Correo electronico</string>
     <string name="VolverPassword">Confirmar contraseña</string>
     <string name="aceptar">Aceptar</string>
+    <string name="CerrarSesion">Cerrar sesión</string>
+    <string name="Buscar">Buscar</string>
 </resources>
