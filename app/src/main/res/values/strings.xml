@@ -5,4 +5,8 @@
     <string name="registrar">O Registrar</string>
     <string name="password">Contraseña</string>
     <string name="user">Usuario</string>
+    <string name="registarse">Registrarse</string>
+    <string name="Correo">Correo electronico</string>
+    <string name="VolverPassword">Confirmar contraseña</string>
+    <string name="aceptar">Aceptar</string>
 </resources>
