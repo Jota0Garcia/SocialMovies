@@ -3,11 +3,15 @@ package com.example.aplicacion;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,10 +22,16 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
+    FirebaseAuth mAuth;
+    FirebaseUser mUser;
 
-    private EditText correo;
-    private EditText contraseña;
+    EditText inputEmail, inputPassword;
+    Button btnLogin;
+    String validEmails = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+            + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+    ProgressDialog progressDialog;
+    TextView createNewAccount;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,46 +39,71 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
 
-        correo = findViewById(R.id.editTextTextUser);
-        contraseña = findViewById(R.id.editTextTextPassword);
-    }
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        //updateUI(currentUser);
-    }
-    public void iniciarSesion(View view){
-        mAuth.signInWithEmailAndPassword(correo.getText().toString().trim(), contraseña.getText().toString())
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            //Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                            startActivity(i);
-                            Toast.makeText(getApplicationContext(), "atenticacion correcta",
-                                    Toast.LENGTH_SHORT).show();
-                            //updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            //Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(getApplicationContext(), "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
-                        }
+        // Inicialización de widgets obtenidos por id
+        createNewAccount = findViewById(R.id.createNewAccount);
+        inputEmail = findViewById(R.id.inputEmail);
+        inputPassword = findViewById(R.id.inputPassword);
+        btnLogin = findViewById(R.id.btnLogin);
+        progressDialog = new ProgressDialog(this);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-                        // ...
+        createNewAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, RegistrarseActivity.class));
+            }
+        });
+
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                perforLogin();
+
+            }
+        });
+    }
+
+    private void perforLogin() {
+        String email = inputEmail.getText().toString();
+        String password = inputPassword.getText().toString();
+
+
+        if (!email.matches(validEmails)) {
+            inputEmail.setError("Introduzca un email correcto");
+            inputEmail.requestFocus();
+        } else if (password.isEmpty() || password.length() < 6) {
+            inputPassword.setError("Introduzca una contraseña válida");
+        } else {
+            progressDialog.setMessage("Login en progreso...");
+            progressDialog.setTitle("Login");
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
+
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        progressDialog.dismiss();
+                        sendUserToNextActivity();
+                        Toast.makeText(MainActivity.this, "Login completado", Toast.LENGTH_SHORT).show();
+                    } else{
+                        progressDialog.dismiss();
+                        Toast.makeText(MainActivity.this,""+task.getException(),Toast.LENGTH_SHORT).show();
                     }
-                });
+                }
+            });
+        }
+
+
     }
 
-    public void irRegistrarse(View view){
-        Intent r = new Intent(this, RegistrarseActivity.class);
-        startActivity(r);
+    private void sendUserToNextActivity() {
+        Intent intent=new Intent(MainActivity.this,HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
+
 }
