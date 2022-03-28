@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Aplicacion</string>
+    <string name="obtener_contraseña">¿Has olvidado tu contraseña?</string>
+    <string name="ingresar">Aceptar</string>
+    <string name="registrar">O Registrar</string>
+    <string name="password">Contraseña</string>
+    <string name="user">Usuario</string>
+    <string name="registarse">Registrarse</string>
+    <string name="Correo">Correo electronico</string>
+    <string name="VolverPassword">Confirmar contraseña</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="CerrarSesion">Cerrar sesión</string>
+    <string name="Buscar">Buscar</string>
 </resources>
