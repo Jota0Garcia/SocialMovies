@@ -28,7 +28,7 @@
                 android:id="@+id/appTitle"
                 android:layout_width="400dp"
                 android:layout_height="48dp"
-                android:layout_marginTop="120dp"
+                android:layout_marginTop="100dp"
                 android:fontFamily="@font/fredoka_one"
                 android:text="¡Registrate Ahora!"
                 android:textAlignment="center"
@@ -36,7 +36,7 @@
                 android:textSize="40sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.494"
+                app:layout_constraintHorizontal_bias="0.454"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
