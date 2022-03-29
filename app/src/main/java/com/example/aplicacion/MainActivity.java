@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnLogin.setOnClickListener();
+    //    btnLogin.setOnClickListener();
     }
 
     private void perforLogin() {
