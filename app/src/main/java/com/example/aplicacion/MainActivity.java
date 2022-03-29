@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
             + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
     ProgressDialog progressDialog;
     TextView createNewAccount;
+    ImageView btnGoogle;
+
 
 
     @Override
@@ -48,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         progressDialog = new ProgressDialog(this);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        btnGoogle=findViewById(R.id.btnGoogle);
+
 
         createNewAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        btnLogin.setOnClickListener();
     }
 
     private void perforLogin() {
