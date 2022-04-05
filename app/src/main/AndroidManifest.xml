@@ -22,9 +22,6 @@
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".BuscarActivity"
-            android:exported="false" />
-        <activity
             android:name=".RegistrarseActivity"
             android:exported="false" />
         <activity
