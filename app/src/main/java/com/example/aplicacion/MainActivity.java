@@ -71,7 +71,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    //    btnLogin.setOnClickListener();
+        btnGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("EEEE");
+                Intent intent=new Intent(MainActivity.this,GoogleSignInActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void perforLogin() {
