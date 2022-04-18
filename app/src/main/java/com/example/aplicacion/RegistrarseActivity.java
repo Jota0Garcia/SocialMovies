@@ -107,7 +107,7 @@ public class RegistrarseActivity extends AppCompatActivity {
     }
 
     private void sendUserToNextActivity() {
-        Intent intent=new Intent(RegistrarseActivity.this,HomeActivity.class);
+        Intent intent=new Intent(RegistrarseActivity.this,MainActivityBottomNav.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
