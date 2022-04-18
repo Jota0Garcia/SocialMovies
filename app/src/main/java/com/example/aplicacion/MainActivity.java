@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         btnGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println("EEEE");
                 Intent intent=new Intent(MainActivity.this,GoogleSignInActivity.class);
                 startActivity(intent);
             }
@@ -115,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendUserToNextActivity() {
-        Intent intent=new Intent(MainActivity.this,HomeActivity.class);
+        Intent intent=new Intent(MainActivity.this,MainActivityBottomNav.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
