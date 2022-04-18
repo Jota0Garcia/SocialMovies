@@ -11,4 +11,9 @@
     <string name="aceptar">Aceptar</string>
     <string name="CerrarSesion">Cerrar sesión</string>
     <string name="Buscar">Buscar</string>
+    <string name="title_activity_main_bottom_nav">MainActivityBottomNav</string>
+    <string name="title_buscar">Buscar</string>
+    <string name="title_filtro">Filtro</string>
+    <string name="title_social">Social</string>
+    <string name="title_config">Config</string>
 </resources>
