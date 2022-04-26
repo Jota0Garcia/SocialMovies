@@ -3,41 +3,43 @@ package com.example.aplicacion.ui.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 public class MovieModel implements Parcelable {
 
     // Esta clase se utiliza para las películas, por tanto debe tener
     // los mismos atributos que recibimos por el json
 
 
-    private String titulo;
-    private String portada;
-    private String fecha_publicacion;
-    private int id;
-    private float valoracion;
-    private String descripcion;
+    private String title;
+    private String poster_path;
+    private String release_date;
+    private int movie_id;
+    private float vote_average;
+    private String movie_overview;
 
 
     // Constructor
-    public MovieModel(String titulo, String portada, String fecha_publicacion, int id, float valoracion, String descripcion) {
-        this.titulo = titulo;
-        this.portada = portada;
-        this.fecha_publicacion = fecha_publicacion;
-        this.id = id;
-        this.valoracion = valoracion;
-        this.descripcion = descripcion;
+    public MovieModel(String title, String poster_path, String release_date, int movie_id, float vote_average, String movie_overview) {
+        this.title = title;
+        this.poster_path = poster_path;
+        this.release_date = release_date;
+        this.movie_id = movie_id;
+        this.vote_average = vote_average;
+        this.movie_overview = movie_overview;
     }
-
 
     // Getters
 
 
     protected MovieModel(Parcel in) {
-        titulo = in.readString();
-        portada = in.readString();
-        fecha_publicacion = in.readString();
-        id = in.readInt();
-        valoracion = in.readFloat();
-        descripcion = in.readString();
+        title = in.readString();
+        poster_path = in.readString();
+        release_date = in.readString();
+        movie_id = in.readInt();
+        vote_average = in.readFloat();
+        movie_overview = in.readString();
     }
 
     public static final Creator<MovieModel> CREATOR = new Creator<MovieModel>() {
@@ -52,43 +54,66 @@ public class MovieModel implements Parcelable {
         }
     };
 
-    public String getTitulo() {
-        return titulo;
+    public String getTitle() {
+        return title;
     }
 
-    public String getPortada() {
-        return portada;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getFecha_publicacion() {
-        return fecha_publicacion;
+    public String getPoster_path() {
+        return poster_path;
     }
 
-    public int getId() {
-        return id;
+    public void setPoster_path(String poster_path) {
+        this.poster_path = poster_path;
     }
 
-    public float getValoracion() {
-        return valoracion;
+    public String getRelease_date() {
+        return release_date;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public void setRelease_date(String release_date) {
+        this.release_date = release_date;
     }
 
+    public int getMovie_id() {
+        return movie_id;
+    }
+
+    public void setMovie_id(int movie_id) {
+        this.movie_id = movie_id;
+    }
+
+    public float getVote_average() {
+        return vote_average;
+    }
+
+    public void setVote_average(float vote_average) {
+        this.vote_average = vote_average;
+    }
+
+    public String getMovie_overview() {
+        return movie_overview;
+    }
+
+    public void setMovie_overview(String movie_overview) {
+        this.movie_overview = movie_overview;
+    }
 
     @Override
     public int describeContents() {
-         return 0;
+        return 0;
     }
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(titulo);
-        parcel.writeString(portada);
-        parcel.writeString(fecha_publicacion);
-        parcel.writeInt(id);
-        parcel.writeFloat(valoracion);
-        parcel.writeString(descripcion);
+        parcel.writeString(title);
+        parcel.writeString(poster_path);
+        parcel.writeString(release_date);
+        parcel.writeInt(movie_id);
+        parcel.writeFloat(vote_average);
+        parcel.writeString(movie_overview);
     }
 }
