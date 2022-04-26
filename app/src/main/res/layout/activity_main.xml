@@ -103,13 +103,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:background="@color/white"
                 android:text="Acceder"
                 android:textColor="@color/white"
-                android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="@+id/inputPassword"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="@+id/inputPassword"
-                app:layout_constraintTop_toBottomOf="@+id/forgotPassword" />
+                app:layout_constraintTop_toBottomOf="@+id/forgotPassword"
+                tools:ignore="TextContrastCheck" />
 
             <TextView
                 android:id="@+id/createNewAccount"
@@ -185,6 +186,17 @@
                 app:layout_constraintTop_toTopOf="@+id/btnGoogle"
                 app:layout_constraintVertical_bias="1.0"
                 app:srcCompat="@drawable/facebook_logo" />
+
+            <Button
+                android:id="@+id/buttonTest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="prueba api"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.515"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

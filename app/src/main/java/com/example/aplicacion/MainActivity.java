@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     TextView createNewAccount;
     ImageView btnGoogle;
+    ImageView btnFacebook;
 
 
 
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         btnGoogle=findViewById(R.id.btnGoogle);
+        btnFacebook=findViewById(R.id.btnFacebook);
 
 
         createNewAccount.setOnClickListener(new View.OnClickListener() {
@@ -71,8 +73,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    //    btnLogin.setOnClickListener();
+        btnGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,GoogleSignInActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
+            }
+        });
+
+        btnFacebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this,FacebookAuthactivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
+            }
+        });
     }
+
+
+
+
 
     private void perforLogin() {
         String email = inputEmail.getText().toString();

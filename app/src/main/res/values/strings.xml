@@ -16,4 +16,7 @@
     <string name="title_filtro">Filtro</string>
     <string name="title_social">Social</string>
     <string name="title_config">Config</string>
+    <string name="facebook_app_id">2015319155316055</string>
+    <string name="fb_login_protocol_scheme">fb2015319155316055</string>
+    <string name="facebook_client_token">3d07402e14f2d891232bd4dbe59723fe</string>
 </resources>
