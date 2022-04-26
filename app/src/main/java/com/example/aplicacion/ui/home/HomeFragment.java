@@ -9,9 +9,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.aplicacion.MovieListActivity;
 import com.example.aplicacion.R;
 import com.example.aplicacion.databinding.FragmentHomeBinding;
 import com.example.aplicacion.ui.models.MovieModel;
@@ -34,8 +39,26 @@ public class HomeFragment extends Fragment {
     Button btn;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        HomeViewModel homeViewModel =
+                new ViewModelProvider(this).get(HomeViewModel.class);
+
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+
+        //final TextView textView = binding.textHome;
+        //homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        return root;
+    }
+    //private MovieListViewModel movieListViewModel;
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //Forma de buscar pulsando el boton
+        //View view = inflater.inflate(R.layout.fragment_home, container, false);
         btn = (Button) view.findViewById(R.id.buttonBuscar);
+        //View v = getView().findViewById(R.id.buttonBuscar);
+        //btn = (Button) getActivity().findViewById(R.id.buttonBuscar);
         btn.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -44,16 +67,43 @@ public class HomeFragment extends Fragment {
                 GetRetrofitResponse();
             }
         });
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        /*
+        //Forma de buscar con el searchView
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        //RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+        
+        //movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
+
+        //ConfigureRecyclerView();
+        //ObserveAnyChange();
+        //searchView
+        SearchView searchView = (SearchView) view.findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                movieListViewModel.searchMovieApi(
+                        query,
+                        pageNumber:1
+                );
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        //SetupSearchView();
+        */
+
     }
+    //private void SetupSearchView() {
+    //    SearchView searchView = (SearchView) view.findViewById(R.id.buttonBuscar);
+    //}
+
 
     @Override
     public void onDestroyView() {
@@ -62,7 +112,7 @@ public class HomeFragment extends Fragment {
     }
     private void GetRetrofitResponse() {
         MovieApi movieApi = Servicey.getMovieApi();
-        Call<MovieSearchResponse> responseCall = movieApi.searchMovie(Credentials.API_KEY, "Jack Reacher", 1);
+        Call<MovieSearchResponse> responseCall = movieApi.searchMovie(Credentials.API_KEY, "Action", 1);
 
         responseCall.enqueue(new Callback<MovieSearchResponse>() {
             @Override
@@ -71,7 +121,7 @@ public class HomeFragment extends Fragment {
                     Log.v("Tag", "the response" + response.body().toString());
                     List<MovieModel> movies = new ArrayList<>(response.body().getMovies());
                     for (MovieModel movie : movies) {
-                        Log.v("Tag", "The List" + movie.getFecha_publicacion());
+                        Log.v("Tag", "The List" + movie.getTitle());
                     }
                 } else {
                     try {

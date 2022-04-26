@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.v("Tag","the response"+response.body().toString());
                     List<MovieModel> movies=new ArrayList<>(response.body().getMovies());
                     for (MovieModel movie : movies){
-                        Log.v("Tag","The release date: "+movie.getRelease_date());
+                        Log.v("Tag","The release date: "+movie.getTitle());
                     }
                 }
                 else{
@@ -207,35 +207,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent=new Intent(MainActivity.this,MainActivityBottomNav.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-    }
-    private void GetRetrofitResponse() {
-        MovieApi movieApi= Servicey.getMovieApi();
-        Call<MovieSearchResponse> responseCall=movieApi.searchMovie(Credentials.API_KEY,"Jack Reacher",1);
-
-        responseCall.enqueue(new Callback<MovieSearchResponse>() {
-            @Override
-            public void onResponse(Call<MovieSearchResponse> call, Response<MovieSearchResponse> response) {
-                if(response.code()==200){
-                    Log.v("Tag","the response"+response.body().toString());
-                    List<MovieModel> movies=new ArrayList<>(response.body().getMovies());
-                    for (MovieModel movie : movies){
-                        Log.v("Tag","The List"+movie.getFecha_publicacion());
-                    }
-                }
-                else{
-                    try{
-                        Log.v("Tag","Error"+response.errorBody().string());
-                    } catch (IOException e){
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MovieSearchResponse> call, Throwable t) {
-
-            }
-        });
-
     }
 }
