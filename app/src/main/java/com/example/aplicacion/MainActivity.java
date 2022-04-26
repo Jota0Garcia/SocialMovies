@@ -16,11 +16,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.aplicacion.ui.models.MovieModel;
+import com.example.aplicacion.ui.request.Servicey;
+import com.example.aplicacion.ui.response.MovieSearchResponse;
+import com.example.aplicacion.ui.utils.Credentials;
+import com.example.aplicacion.ui.utils.MovieApi;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,7 +69,16 @@ public class MainActivity extends AppCompatActivity {
         btnGoogle=findViewById(R.id.btnGoogle);
         btnFacebook=findViewById(R.id.btnFacebook);
 
+        Button btn=findViewById(R.id.buttonTest);
 
+        btn.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view){
+                Log.i("1","Prueba API Pulsada");
+                GetRetrofitResponse();
+            }
+        });
         createNewAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,5 +157,34 @@ public class MainActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+    private void GetRetrofitResponse() {
+        MovieApi movieApi= Servicey.getMovieApi();
+        Call<MovieSearchResponse> responseCall=movieApi.searchMovie(Credentials.API_KEY,"Jack Reacher",1);
 
+        responseCall.enqueue(new Callback<MovieSearchResponse>() {
+            @Override
+            public void onResponse(Call<MovieSearchResponse> call, Response<MovieSearchResponse> response) {
+                if(response.code()==200){
+                    Log.v("Tag","the response"+response.body().toString());
+                    List<MovieModel> movies=new ArrayList<>(response.body().getMovies());
+                    for (MovieModel movie : movies){
+                        Log.v("Tag","The List"+movie.getFecha_publicacion());
+                    }
+                }
+                else{
+                    try{
+                        Log.v("Tag","Error"+response.errorBody().string());
+                    } catch (IOException e){
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MovieSearchResponse> call, Throwable t) {
+
+            }
+        });
+
+    }
 }
