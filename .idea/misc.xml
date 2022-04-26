@@ -4,31 +4,30 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/humbe/AndroidStudioProjects/SocialMoviesbb/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1125" />
-        <entry key="..\:/Users/humbe/AndroidStudioProjects/SocialMoviesbb/app/src/main/res/drawable/btn_style.xml" value="0.118" />
         <entry key="..\:/Users/humbe/AndroidStudioProjects/SocialMoviesbb/app/src/main/res/drawable/edt_style.xml" value="0.1" />
         <entry key="..\:/Users/humbe/AndroidStudioProjects/SocialMoviesbb/app/src/main/res/drawable/email_logo.xml" value="0.1125" />
         <entry key="..\:/Users/humbe/AndroidStudioProjects/SocialMoviesbb/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1125" />
-        <entry key="..\:/Users/humbe/AndroidStudioProjects/SocialMoviesbb/app/src/main/res/layout/activity_buscar.xml" value="0.2" />
-        <entry key="..\:/Users/humbe/AndroidStudioProjects/SocialMoviesbb/app/src/main/res/layout/activity_facebook_authactivity.xml" value="0.23641304347826086" />
+        <entry key="..\:/Users/humbe/AndroidStudioProjects/SocialMoviesbb/app/src/main/res/layout/activity_buscar.xml" value="0.10104166666666667" />
         <entry key="..\:/Users/humbe/AndroidStudioProjects/SocialMoviesbb/app/src/main/res/layout/activity_google_sign_in.xml" value="0.10104166666666667" />
         <entry key="..\:/Users/humbe/AndroidStudioProjects/SocialMoviesbb/app/src/main/res/layout/activity_home.xml" value="0.10104166666666667" />
         <entry key="..\:/Users/humbe/AndroidStudioProjects/SocialMoviesbb/app/src/main/res/layout/activity_main.xml" value="0.16" />
-        <entry key="..\:/Users/humbe/AndroidStudioProjects/SocialMoviesbb/app/src/main/res/layout/activity_main_bottom_nav.xml" value="0.14479166666666668" />
-        <entry key="..\:/Users/humbe/AndroidStudioProjects/SocialMoviesbb/app/src/main/res/layout/activity_registrarse.xml" value="0.16822916666666668" />
-        <entry key="..\:/Users/humbe/AndroidStudioProjects/SocialMoviesbb/app/src/main/res/layout/fragment_config.xml" value="0.14479166666666668" />
-        <entry key="..\:/Users/humbe/AndroidStudioProjects/SocialMoviesbb/app/src/main/res/layout/fragment_dashboard.xml" value="0.14479166666666668" />
-        <entry key="..\:/Users/humbe/AndroidStudioProjects/SocialMoviesbb/app/src/main/res/layout/fragment_home.xml" value="0.14479166666666668" />
-        <entry key="..\:/Users/humbe/AndroidStudioProjects/SocialMoviesbb/app/src/main/res/layout/fragment_notifications.xml" value="0.14479166666666668" />
-        <entry key="..\:/Users/humbe/AndroidStudioProjects/SocialMoviesbb/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.177" />
         <entry key="..\:/Users/javga/AndroidStudioProjects/SocialMovies/app/src/main/res/drawable/input_white_main.xml" value="0.2595" />
         <entry key="..\:/Users/javga/AndroidStudioProjects/SocialMovies/app/src/main/res/layout/activity_buscar.xml" value="0.2" />
         <entry key="..\:/Users/javga/AndroidStudioProjects/SocialMovies/app/src/main/res/layout/activity_google_sign_in.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/javga/AndroidStudioProjects/SocialMovies/app/src/main/res/layout/activity_home.xml" value="0.17831813576494426" />
-        <entry key="..\:/Users/javga/AndroidStudioProjects/SocialMovies/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/javga/AndroidStudioProjects/SocialMovies/app/src/main/res/layout/activity_main.xml" value="0.14792899408284024" />
         <entry key="..\:/Users/javga/AndroidStudioProjects/SocialMovies/app/src/main/res/layout/activity_registrarse.xml" value="0.264" />
+        <entry key="..\:/Users/javga/AndroidStudioProjects/SocialMovies/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Users/zzale/AndroidStudioProjects/SocialMovies/app/src/main/res/drawable/btn_style.xml" value="0.1045" />
         <entry key="..\:/Users/zzale/AndroidStudioProjects/SocialMovies/app/src/main/res/drawable/edt_style.xml" value="0.1045" />
         <entry key="..\:/Users/zzale/AndroidStudioProjects/SocialMovies/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/activity_buscar.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/activity_home.xml" value="0.24954710144927536" />
+        <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/activity_main_bottom_nav.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/fragment_buscar.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/fragment_config.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/fragment_filtro.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
