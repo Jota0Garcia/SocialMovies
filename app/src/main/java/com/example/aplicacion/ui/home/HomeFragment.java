@@ -1,5 +1,6 @@
 package com.example.aplicacion.ui.home;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,17 +14,22 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aplicacion.MovieListActivity;
 import com.example.aplicacion.R;
 import com.example.aplicacion.databinding.FragmentHomeBinding;
+import com.example.aplicacion.ui.adapters.MovieRecyclerView;
+import com.example.aplicacion.ui.adapters.OnMovieListener;
 import com.example.aplicacion.ui.models.MovieModel;
 import com.example.aplicacion.ui.request.Servicey;
 import com.example.aplicacion.ui.response.MovieSearchResponse;
 import com.example.aplicacion.ui.utils.Credentials;
 import com.example.aplicacion.ui.utils.MovieApi;
+import com.example.aplicacion.ui.viewmodels.MovieListViewModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,10 +39,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements OnMovieListener {
 
     private FragmentHomeBinding binding;
-    Button btn;
+    //Button btn;
+    private MovieListViewModel movieListViewModel;
+    private RecyclerView recyclerView;
+    private MovieRecyclerView movieRecyclerViewAdapter;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -45,15 +55,13 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-        //final TextView textView = binding.textHome;
-        //homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
     //private MovieListViewModel movieListViewModel;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        /*
         //Forma de buscar pulsando el boton
         //View view = inflater.inflate(R.layout.fragment_home, container, false);
         btn = (Button) view.findViewById(R.id.buttonBuscar);
@@ -67,19 +75,28 @@ public class HomeFragment extends Fragment {
                 GetRetrofitResponse();
             }
         });
-        /*
+
+         */
+       // /*
         //Forma de buscar con el searchView
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        //Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
-        //RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 
-        
+        movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
+
+        ConfigureRecyclerView();
+        ObserveAnyChange();
+        searchMovieApi("Fast", 1);
+
+
         //movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
 
         //ConfigureRecyclerView();
         //ObserveAnyChange();
         //searchView
+        /*
         SearchView searchView = (SearchView) view.findViewById(R.id.search_view);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -97,7 +114,7 @@ public class HomeFragment extends Fragment {
             }
         });
         //SetupSearchView();
-        */
+        //*/
 
     }
     //private void SetupSearchView() {
@@ -110,6 +127,49 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+    // Func para detectar cambios
+    private void ObserveAnyChange(){
+        //No puedo poner this me obliga a poner getViewLifecycleOwner()
+        movieListViewModel.getMovies().observe(getViewLifecycleOwner(), new Observer<List<MovieModel>>() {
+            @Override
+            public void onChanged(List<MovieModel> movieModels) {
+                if(movieModels != null){
+                    for(MovieModel movieModel: movieModels){
+                        Log.v("Tag","Han cambiado: "+movieModel.getTitle());
+
+                        movieRecyclerViewAdapter.setmMovies(movieModels);
+                    }
+                }
+
+            }
+        });
+    }
+
+
+    // Llamada al metodo en nuestra pagina principal
+
+    private void searchMovieApi(String query,int pageNumber){
+        movieListViewModel.searchMovieApi(query,pageNumber);
+    }
+    //Inicializar recyclerView y añadirle datos
+    private void ConfigureRecyclerView(){
+        //Live data cant be passed via the constructor
+        movieRecyclerViewAdapter = new MovieRecyclerView(this);
+        recyclerView.setAdapter(movieRecyclerViewAdapter);
+        //No deja poner this tiene que ser clase context entonces puse getContext() o requireContext()
+        recyclerView.setLayoutManager(new LinearLayoutManager());
+    }
+
+    @Override
+    public void onMovieClick(int position) {
+
+    }
+
+    @Override
+    public void onCategoryClick(String category) {
+
+    }
+/*
     private void GetRetrofitResponse() {
         MovieApi movieApi = Servicey.getMovieApi();
         Call<MovieSearchResponse> responseCall = movieApi.searchMovie(Credentials.API_KEY, "Action", 1);
@@ -138,4 +198,6 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+    */
+
 }
