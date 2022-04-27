@@ -8,12 +8,15 @@ import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.aplicacion.ui.models.MovieModel;
 import com.example.aplicacion.ui.request.Servicey;
 import com.example.aplicacion.ui.response.MovieSearchResponse;
 import com.example.aplicacion.ui.utils.Credentials;
 import com.example.aplicacion.ui.utils.MovieApi;
+import com.example.aplicacion.ui.viewmodels.MovieListViewModel;
 
 import java.io.Console;
 import java.io.IOException;
@@ -33,12 +36,19 @@ public class MovieListActivity extends AppCompatActivity {
 
 
     Button btn;
+    private MovieListViewModel movieListViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btn=findViewById(R.id.buttonTest);
 
+        movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
+
+        ObserveAnyChange();
+
+        /*
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,8 +56,38 @@ public class MovieListActivity extends AppCompatActivity {
                 GetRetrofitResponse();
             }
         });
+        */
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchMovieApi("Star Wars",1);
+            }
+        });
 
 
+    }
+
+    // Func para detectar cambios
+    private void ObserveAnyChange(){
+        movieListViewModel.getMovies().observe(this, new Observer<List<MovieModel>>() {
+            @Override
+            public void onChanged(List<MovieModel> movieModels) {
+                if(movieModels != null){
+                    for(MovieModel movieModel: movieModels){
+                        Log.v("Tag","Han cambiado: "+movieModel.getTitle());
+                    }
+                }
+
+            }
+        });
+    }
+
+
+    // Llamada al metodo en nuestra pagina principal
+
+    private void searchMovieApi(String query,int pageNumber){
+        movieListViewModel.searchMovieApi(query,pageNumber);
     }
 
     private void GetRetrofitResponse() {
