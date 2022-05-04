@@ -3,13 +3,13 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/vector_buscar"
-        android:title="@string/Buscar" />
+        android:icon="@drawable/vector_new"
+        android:title="@string/title_new" />
 
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/vector_filtro"
-        android:title="@string/title_filtro" />
+        android:icon="@drawable/vector_buscar"
+        android:title="@string/title_buscar" />
 
     <item
         android:id="@+id/navigation_notifications"
