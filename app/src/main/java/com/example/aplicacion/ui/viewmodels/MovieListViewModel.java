@@ -16,6 +16,10 @@ public class MovieListViewModel extends ViewModel {
     private MovieRepository movieRepository;
 
 
+    public MovieListViewModel(){
+
+    }
+
     public MovieListViewModel(MutableLiveData<List<MovieModel>> mMovies) {
         movieRepository=MovieRepository.getInstance();
     }
