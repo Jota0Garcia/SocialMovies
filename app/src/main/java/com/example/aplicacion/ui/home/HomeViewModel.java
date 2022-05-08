@@ -1,36 +1,39 @@
 package com.example.aplicacion.ui.home;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.aplicacion.ui.models.MovieModel;
-import com.example.aplicacion.ui.request.Servicey;
-import com.example.aplicacion.ui.response.MovieSearchResponse;
-import com.example.aplicacion.ui.utils.Credentials;
-import com.example.aplicacion.ui.utils.MovieApi;
+import com.example.aplicacion.ui.repositories.MovieRepository;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class HomeViewModel extends ViewModel {
 
-    private final MutableLiveData<String> mText;
+    //private final MutableLiveData<String> mText;
 
-    public HomeViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+    //public HomeViewModel() {
+    //    mText = new MutableLiveData<>();
+    //    mText.setValue("This is home fragment");
+    //}
+
+
+    //public LiveData<String> getText() {return mText;}
+    private MovieRepository movieRepository;
+    public HomeViewModel(){
+        movieRepository=MovieRepository.getInstance();
+    }
+    public HomeViewModel(MutableLiveData<List<MovieModel>> mMovies) {
+        movieRepository=MovieRepository.getInstance();
+    }
+    public LiveData<List<MovieModel>> getMovies(){
+        return movieRepository.getMovies();
     }
 
-
-    public LiveData<String> getText() {
-        return mText;
+    // Llamamos los metodos en el viewmodel.
+    public void searchMovieApi(String query, int pageNumber)
+    {
+        movieRepository.searchMovieApi(query,pageNumber);
     }
 }

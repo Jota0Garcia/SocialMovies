@@ -1,15 +1,12 @@
 package com.example.aplicacion;
 
 import android.os.Bundle;
-import android.os.Debug;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.aplicacion.ui.models.MovieModel;
 import com.example.aplicacion.ui.request.Servicey;
@@ -18,7 +15,6 @@ import com.example.aplicacion.ui.utils.Credentials;
 import com.example.aplicacion.ui.utils.MovieApi;
 import com.example.aplicacion.ui.viewmodels.MovieListViewModel;
 
-import java.io.Console;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +40,7 @@ public class MovieListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         btn=findViewById(R.id.buttonTest);
 
-        movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
+        //movieListViewModel = new ViewModelProvider(this).get(MovieListViewModel.class);
 
         ObserveAnyChange();
 

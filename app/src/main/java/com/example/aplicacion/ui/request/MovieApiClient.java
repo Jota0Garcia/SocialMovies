@@ -1,8 +1,6 @@
 package com.example.aplicacion.ui.request;
 
-import android.graphics.Movie;
 import android.util.Log;
-import android.widget.ListView;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -72,7 +70,7 @@ public class MovieApiClient {
                     public void run() { // Aquí cancelamos la solicitud a la api según el tiempo de espera
                         myHandler.cancel(true); // Cancela el handler
                     }
-                }, 4000, TimeUnit.MICROSECONDS); // Añadimos un timeout a la llamada de la api.
+                }, 30, TimeUnit.SECONDS); // Añadimos un timeout a la llamada de la api.
 
     }
 
@@ -95,11 +93,13 @@ public class MovieApiClient {
         public void run() { // El método que otiene los objetos de la respuesta
             try{
                 Response response=getMovies(query,pageNumber).execute();
+                Log.v("El response","El code es: "+response.code());
                 if(cancelRequest){
                     return;
                 }
                 if(response.code()==200){ // Si la consumición de la api ha ido bien, guardamos las películas en la lista.
                     List<MovieModel> list=new ArrayList<>(((MovieSearchResponse)response.body()).getMovies());
+                    Log.v("Peliculas","Las peliculas son: "+response.code());
                     if(pageNumber==1){
                         // Tendremos que enviar los datos al "Live Data"
 
@@ -108,7 +108,7 @@ public class MovieApiClient {
 
                         List<MovieModel> currentMovies = mMovies.getValue();
                         currentMovies.addAll(list);
-
+                        mMovies.postValue(currentMovies);
 
                     }
 
@@ -130,6 +130,7 @@ public class MovieApiClient {
 
 
             if(cancelRequest){
+                Log.v("Tag","La búsqueda se ha cancelado");
                 return; // Si se ha cancelado la solicitud no hacer nada.
             }
         }

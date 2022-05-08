@@ -3,9 +3,6 @@ package com.example.aplicacion.ui.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 public class MovieModel implements Parcelable {
 
     // Esta clase se utiliza para las películas, por tanto debe tener
@@ -15,25 +12,28 @@ public class MovieModel implements Parcelable {
     private String title;
     private String poster_path;
     private String release_date;
+
+
     private int movie_id;
     private float vote_average;
     private String movie_overview;
-    private int runtime;
+    private String original_language;
     //para mas simpleza utilizamos el release_date instead of category
     //genera un objeto json
 
 
     // Constructor
-    public MovieModel(String title, String poster_path, String release_date, int movie_id
-            , float vote_average, String movie_overview, int runtime) {
+
+    public MovieModel(String title, String poster_path, String release_date, int movie_id, float vote_average, String movie_overview, String original_language) {
         this.title = title;
         this.poster_path = poster_path;
         this.release_date = release_date;
         this.movie_id = movie_id;
         this.vote_average = vote_average;
         this.movie_overview = movie_overview;
-        this.runtime = runtime;
+        this.original_language = original_language;
     }
+
 
     // Getters
 
@@ -45,7 +45,7 @@ public class MovieModel implements Parcelable {
         movie_id = in.readInt();
         vote_average = in.readFloat();
         movie_overview = in.readString();
-        runtime = in.readInt();
+        original_language = in.readString();
     }
 
     public static final Creator<MovieModel> CREATOR = new Creator<MovieModel>() {
@@ -108,8 +108,8 @@ public class MovieModel implements Parcelable {
         this.movie_overview = movie_overview;
     }
 
-    public int getRuntime() {
-        return runtime;
+    public String getOriginal_language() {
+        return original_language;
     }
 
     @Override
@@ -125,5 +125,19 @@ public class MovieModel implements Parcelable {
         parcel.writeInt(movie_id);
         parcel.writeFloat(vote_average);
         parcel.writeString(movie_overview);
+        parcel.writeString(original_language);
+    }
+
+    @Override
+    public String toString() {
+        return "MovieModel{" +
+                "title='" + title + '\'' +
+                ", poster_path='" + poster_path + '\'' +
+                ", release_date='" + release_date + '\'' +
+                ", movie_id=" + movie_id +
+                ", vote_average=" + vote_average +
+                ", movie_overview='" + movie_overview + '\'' +
+                ", original_language='" + original_language + '\'' +
+                '}';
     }
 }

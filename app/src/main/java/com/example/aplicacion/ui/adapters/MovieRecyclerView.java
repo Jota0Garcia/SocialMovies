@@ -34,14 +34,20 @@ public class MovieRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
 
         ((MovieViewHolder)holder).title.setText(mMovies.get(i).getTitle());
+
         ((MovieViewHolder)holder).release_date.setText(mMovies.get(i).getRelease_date());
-        ((MovieViewHolder)holder).duration.setText(mMovies.get(i).getRuntime());
+///*
+        ((MovieViewHolder)holder).duration.setText(mMovies.get(i).getOriginal_language());
+
         //Nuestro rating es sobre 5 y el de la api sobre 10 por eso el /2
         ((MovieViewHolder)holder).ratingBar.setRating((mMovies.get(i).getVote_average())/2);
         //ImageView usando Glide Library
         Glide.with(holder.itemView.getContext())
-                .load(mMovies.get(i).getPoster_path())
+                .load("https://image.tmdb.org/t/p/w500/"
+                        +mMovies.get(i).getPoster_path())
                 .into((((MovieViewHolder)holder).imageView));
+
+        // */
     }
 
     @Override

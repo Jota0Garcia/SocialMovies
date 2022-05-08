@@ -1,23 +1,23 @@
 package com.example.aplicacion.ui.viewmodels;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.example.aplicacion.ui.models.MovieModel;
 import com.example.aplicacion.ui.repositories.MovieRepository;
 
 import java.util.List;
 
-public class MovieListViewModel extends ViewModel {
+public class MovieListViewModel extends AppCompatActivity {
 
     // Clase para el viewmodel
 
-    private MovieRepository movieRepository;
+    private final MovieRepository movieRepository;
 
 
     public MovieListViewModel(){
-
+        movieRepository=MovieRepository.getInstance();
     }
 
     public MovieListViewModel(MutableLiveData<List<MovieModel>> mMovies) {
