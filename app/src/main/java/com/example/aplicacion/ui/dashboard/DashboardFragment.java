@@ -19,6 +19,7 @@ import com.example.aplicacion.R;
 import com.example.aplicacion.ui.adapters.MovieRecyclerView;
 import com.example.aplicacion.ui.adapters.OnMovieListener;
 import com.example.aplicacion.ui.models.MovieModel;
+import com.example.aplicacion.ui.viewmodels.MovieListViewModel;
 
 public class DashboardFragment extends Fragment implements OnMovieListener {
 
@@ -131,6 +132,26 @@ public class DashboardFragment extends Fragment implements OnMovieListener {
         recyclerView.setAdapter(movieRecyclerViewAdapter);
         //No deja poner this tiene que ser clase context entonces puse getContext() o requireContext()
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        //Recycler view Pagination
+        // Loading next page of api response
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                                             @Override
+                                             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                                                 if (!recyclerView.canScrollVertically(1)){
+                                                     // Aqui mostramos los proximos resultados para la proxima pagina
+                                                movieListViewModel.searchNextPage();
+                                                 }
+                                             }
+                                         }
+        );
+
+
+
+
+
+
+
+
     }
 
     @Override

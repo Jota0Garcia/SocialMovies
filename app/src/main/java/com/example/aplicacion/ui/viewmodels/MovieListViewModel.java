@@ -34,4 +34,9 @@ public class MovieListViewModel extends AppCompatActivity {
     {
         movieRepository.searchMovieApi(query,pageNumber);
     }
+
+
+    public void searchNextPage(){
+        movieRepository.searchNextPage();
+    }
 }

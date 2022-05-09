@@ -37,4 +37,9 @@ public class DashboardViewModel extends ViewModel {
     {
         movieRepository.searchMovieApi(query,pageNumber);
     }
+
+    public void searchNextPage() {
+        movieRepository.searchNextPage();
+
+    }
 }
