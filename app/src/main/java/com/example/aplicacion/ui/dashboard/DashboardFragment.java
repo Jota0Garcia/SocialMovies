@@ -1,5 +1,6 @@
 package com.example.aplicacion.ui.dashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.aplicacion.MovieDetails;
 import com.example.aplicacion.R;
 import com.example.aplicacion.ui.adapters.MovieRecyclerView;
 import com.example.aplicacion.ui.adapters.OnMovieListener;
@@ -157,6 +159,13 @@ public class DashboardFragment extends Fragment implements OnMovieListener {
     @Override
     public void onMovieClick(int position) {
         Toast.makeText(getContext(),"The position"+position,Toast.LENGTH_SHORT).show();
+
+        //no necesitamos la posicion
+        //necesitamos el id para obtener todos los detalles
+
+        Intent intent = new Intent(getContext(), MovieDetails.class);
+        intent.putExtra("movie", movieRecyclerViewAdapter.getSelectedMovie(position));
+        startActivity(intent);
     }
 
     @Override

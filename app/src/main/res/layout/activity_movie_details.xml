@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MovieDetails">
+
+    <ImageView
+        android:id="@+id/imageViewdetails"
+        android:layout_width="393dp"
+        android:layout_height="461dp"
+        app:srcCompat="@drawable/_d520d91660956263af7434a7dbc2dec__classic_movie_posters_classic_movies"
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="-34dp" />
+
+    <TextView
+        android:id="@+id/textViewtitledetails"
+        android:layout_width="148dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewdetails"
+        tools:layout_editor_absoluteX="9dp" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="241dp"
+        android:layout_height="60dp"
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="469dp" />
+
+    <TextView
+        android:id="@+id/textViewdesc_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="TextView"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar"
+        tools:layout_editor_absoluteX="9dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

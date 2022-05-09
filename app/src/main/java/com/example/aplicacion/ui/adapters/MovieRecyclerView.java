@@ -62,4 +62,17 @@ public class MovieRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.mMovies = mMovies;
         notifyDataSetChanged();
     }
+
+
+
+    //obtener id de la pelicula pulsada
+
+    public MovieModel getSelectedMovie(int position){
+        if( mMovies != null){
+            if(mMovies.size() < 0){
+                return mMovies.get(position);
+            }
+        }
+        return null;
+    }
 }
