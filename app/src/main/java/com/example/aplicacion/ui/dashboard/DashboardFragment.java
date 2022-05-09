@@ -18,17 +18,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aplicacion.MovieDetails;
 import com.example.aplicacion.R;
-import com.example.aplicacion.ui.adapters.MovieRecyclerView;
+import com.example.aplicacion.ui.adapters.MovieRecyclerViewBuscar;
 import com.example.aplicacion.ui.adapters.OnMovieListener;
 import com.example.aplicacion.ui.models.MovieModel;
-import com.example.aplicacion.ui.viewmodels.MovieListViewModel;
 
 public class DashboardFragment extends Fragment implements OnMovieListener {
 
-    private DashboardViewModel movieListViewModel;
-    private RecyclerView recyclerView;
-    private MovieRecyclerView movieRecyclerViewAdapter;
-    private SearchView searchView;
+    private DashboardViewModel movieListViewModelBuscar;
+    private RecyclerView recyclerViewBuscar;
+    private MovieRecyclerViewBuscar movieRecyclerViewAdapterBuscar;
+    private SearchView searchViewBuscar;
     private Toolbar toolbar;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -49,11 +48,11 @@ public class DashboardFragment extends Fragment implements OnMovieListener {
 
         //setSupportActionBar(toolbar);
         //searchview
-        searchView = (SearchView) root.findViewById(R.id.search_view);
+        searchViewBuscar = (SearchView) root.findViewById(R.id.search_view);
         SetupSearchView();
 
-        recyclerView = (RecyclerView) root.findViewById(R.id.recyclerViewNew);
-        movieListViewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
+        recyclerViewBuscar = (RecyclerView) root.findViewById(R.id.recyclerViewNew);
+        movieListViewModelBuscar = new ViewModelProvider(this).get(DashboardViewModel.class);
         ConfigureRecyclerView();
         ObserveAnyChange();
         //searchMovieApi("Fast", 1);
@@ -83,10 +82,10 @@ public class DashboardFragment extends Fragment implements OnMovieListener {
 
  */
     private void SetupSearchView() {
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchViewBuscar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                movieListViewModel.searchMovieApi(
+                movieListViewModelBuscar.searchMovieApi(
                         query,
                         1
                 );
@@ -109,12 +108,12 @@ public class DashboardFragment extends Fragment implements OnMovieListener {
     // Func para detectar cambios
     private void ObserveAnyChange(){
         //No puedo poner this me obliga a poner getViewLifecycleOwner()
-        movieListViewModel.getMovies().observe(getViewLifecycleOwner(), movieModels -> {
+        movieListViewModelBuscar.getMovies().observe(getViewLifecycleOwner(), movieModels -> {
             if(movieModels != null){
                 for(MovieModel movieModel: movieModels){
                     Log.v("Tag","Han cambiado: "+movieModel.getTitle());
 
-                    movieRecyclerViewAdapter.setmMovies(movieModels);
+                    movieRecyclerViewAdapterBuscar.setmMoviesBuscar(movieModels);
                 }
             }
 
@@ -130,21 +129,21 @@ public class DashboardFragment extends Fragment implements OnMovieListener {
     //Inicializar recyclerView y añadirle datos
     private void ConfigureRecyclerView(){
         //Live data cant be passed via the constructor
-        movieRecyclerViewAdapter = new MovieRecyclerView(this);
-        recyclerView.setAdapter(movieRecyclerViewAdapter);
+        movieRecyclerViewAdapterBuscar = new MovieRecyclerViewBuscar(this);
+        recyclerViewBuscar.setAdapter(movieRecyclerViewAdapterBuscar);
         //No deja poner this tiene que ser clase context entonces puse getContext() o requireContext()
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewBuscar.setLayoutManager(new LinearLayoutManager(getContext()));
         //Recycler view Pagination
         // Loading next page of api response
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                                             @Override
-                                             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                                                 if (!recyclerView.canScrollVertically(1)){
-                                                     // Aqui mostramos los proximos resultados para la proxima pagina
-                                                movieListViewModel.searchNextPage();
-                                                 }
-                                             }
-                                         }
+        recyclerViewBuscar.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                if (!recyclerView.canScrollVertically(1)){
+                    // Aqui mostramos los proximos resultados para la proxima pagina
+                    movieListViewModelBuscar.searchNextPage();
+                }
+            }
+        }
         );
 
 
