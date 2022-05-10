@@ -1,16 +1,18 @@
 package com.example.aplicacion;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.aplicacion.ui.models.MovieModel;
 
 public class MovieDetails extends AppCompatActivity {
+
+    private MovieModel movieModel;
 
     //widgets
     private ImageView imageViewDetails;
@@ -27,7 +29,7 @@ public class MovieDetails extends AppCompatActivity {
         imageViewDetails = findViewById(R.id.imageViewdetails);
         titleDetails= findViewById(R.id.textViewtitledetails);
         descDetails=findViewById(R.id.textViewdesc_details);
-        ratingBarDetails= findViewById(R.id.ratingBar);
+        ratingBarDetails= findViewById(R.id.ratingBar_details);
 
         GetDataFromIntent();
 
@@ -35,7 +37,7 @@ public class MovieDetails extends AppCompatActivity {
 
     private void GetDataFromIntent() {
         if (getIntent().hasExtra("movie")){
-            MovieModel movieModel = getIntent().getParcelableExtra("movie");
+            movieModel = getIntent().getParcelableExtra("movie");
             Log.v("tagy", "incoming intent" + movieModel.getMovie_id());
         }
 

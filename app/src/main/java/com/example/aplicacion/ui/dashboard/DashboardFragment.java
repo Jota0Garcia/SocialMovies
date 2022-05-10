@@ -163,7 +163,7 @@ public class DashboardFragment extends Fragment implements OnMovieListener {
         //necesitamos el id para obtener todos los detalles
 
         Intent intent = new Intent(getContext(), MovieDetails.class);
-        intent.putExtra("movie", movieRecyclerViewAdapter.getSelectedMovie(position));
+        intent.putExtra("movie", movieRecyclerViewAdapterBuscar.getSelectedMovie(position));
         startActivity(intent);
     }
 

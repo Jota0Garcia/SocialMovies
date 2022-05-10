@@ -61,4 +61,15 @@ public class MovieRecyclerViewBuscar  extends RecyclerView.Adapter<RecyclerView.
         this.mMoviesBuscar = mMoviesBuscar;
         notifyDataSetChanged();
     }
+
+    //obtener id de la pelicula pulsada
+
+    public MovieModel getSelectedMovie(int position){
+        if( mMoviesBuscar != null){
+            if(mMoviesBuscar.size() > 0){
+                return mMoviesBuscar.get(position);
+            }
+        }
+        return null;
+    }
 }
