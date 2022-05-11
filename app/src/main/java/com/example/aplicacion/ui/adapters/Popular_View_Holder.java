@@ -9,29 +9,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aplicacion.R;
 
-public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-    //widgets
-
-    ImageView imageView;
-    RatingBar ratingBar;
+public class Popular_View_Holder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    ImageView imageView22;
+    RatingBar ratingBar22;
 
     //Click listener
     OnMovieListener onMovieListener;
 
-    public MovieViewHolder(@NonNull View itemView, OnMovieListener onMovieListener) {
+    public Popular_View_Holder(@NonNull View itemView,OnMovieListener onMovieListener) {
         super(itemView);
-
         this.onMovieListener = onMovieListener;
-
-        imageView = itemView.findViewById(R.id.movie_img);
-        ratingBar = itemView.findViewById(R.id.rating_bar);
-
+        imageView22=itemView.findViewById(R.id.movie_img_popular);
+        ratingBar22=itemView.findViewById(R.id.rating_bar_popular);
         itemView.setOnClickListener(this);
     }
 
     @Override
-    public void onClick(View view) {
-
+    public void onClick(View v){
         onMovieListener.onMovieClick(getAdapterPosition());
     }
 }

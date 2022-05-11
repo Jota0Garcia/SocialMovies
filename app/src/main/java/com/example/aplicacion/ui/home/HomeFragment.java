@@ -1,5 +1,6 @@
 package com.example.aplicacion.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.aplicacion.MovieDetails;
 import com.example.aplicacion.R;
 import com.example.aplicacion.databinding.FragmentHomeBinding;
 import com.example.aplicacion.ui.adapters.MovieRecyclerView;
@@ -24,6 +26,7 @@ public class HomeFragment extends Fragment implements OnMovieListener {
     private HomeViewModel movieListViewModel;
     private RecyclerView recyclerView;
     private MovieRecyclerView movieRecyclerViewAdapter;
+    boolean isPopular = true;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -39,8 +42,22 @@ public class HomeFragment extends Fragment implements OnMovieListener {
 
         ConfigureRecyclerView();
         ObserveAnyChange();
-        searchMovieApi("Fast", 1);
+        ObservePopularMovies();
+        //searchMovieApi("Fast", 1);
+        //Para coger los datos de las peliculas populares
+        movieListViewModel.searchMoviePop(1);
         return root;
+    }
+
+    private void ObservePopularMovies() {
+        movieListViewModel.getPop().observe(getViewLifecycleOwner(), movieModels -> {
+            if (movieModels != null) {
+                for (MovieModel movieModel : movieModels) {
+                    //Log.v("Tag", "Han cambiado: " + movieModel.getTitle());
+                    movieRecyclerViewAdapter.setmMovies(movieModels);
+                }
+            }
+        });
     }
 
     // Func para detectar cambios
@@ -70,7 +87,8 @@ public class HomeFragment extends Fragment implements OnMovieListener {
         movieRecyclerViewAdapter = new MovieRecyclerView(this);
         recyclerView.setAdapter(movieRecyclerViewAdapter);
         //No deja poner this tiene que ser clase context entonces puse getContext() o requireContext()
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+        //recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -90,7 +108,9 @@ public class HomeFragment extends Fragment implements OnMovieListener {
 
     @Override
     public void onMovieClick(int position) {
-
+        Intent intent = new Intent(getContext(), MovieDetails.class);
+        intent.putExtra("movie", movieRecyclerViewAdapter.getSelectedMovie(position));
+        startActivity(intent);
     }
 
     @Override

@@ -29,6 +29,7 @@ public class DashboardFragment extends Fragment implements OnMovieListener {
     private MovieRecyclerViewBuscar movieRecyclerViewAdapterBuscar;
     private SearchView searchViewBuscar;
     private Toolbar toolbar;
+    boolean isPopular = true;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -95,6 +96,13 @@ public class DashboardFragment extends Fragment implements OnMovieListener {
             @Override
             public boolean onQueryTextChange(String s) {
                 return false;
+            }
+        });
+
+        searchViewBuscar.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isPopular=false;
             }
         });
     }

@@ -15,6 +15,9 @@ public class MovieResponse {
     public MovieModel getMovie(){
         return movie;
     }
+    public MovieModel getPop(){
+        return movie;
+    }
 
     @Override
     public String toString() {

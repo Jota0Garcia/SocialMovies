@@ -20,4 +20,5 @@
     <string name="facebook_app_id">2015319155316055</string>
     <string name="fb_login_protocol_scheme">fb2015319155316055</string>
     <string name="facebook_client_token">3d07402e14f2d891232bd4dbe59723fe</string>
+    <string name="tituloPopular">Peliculas populares</string>
 </resources>

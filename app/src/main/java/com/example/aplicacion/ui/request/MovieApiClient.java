@@ -21,16 +21,17 @@ import retrofit2.Response;
 
 public class MovieApiClient {
 
+    // Esto es el livedata
+    private MutableLiveData<List<MovieModel>> mMovies;// Clase necesaria para el viewmodel
+    private static MovieApiClient instancia;
     // Cremos un "Runable" GLOBAL.
     private RetrieveMoviesRunnable retrieveMoviesRunnable;
 
+    // Esto es el livedata para popular
+    private MutableLiveData<List<MovieModel>> mMoviesPop;// Clase necesaria para el viewmodel
+    // Cremos un "Runable" para popular.
+    private RetrieveMoviesRunnablePop retrieveMoviesRunnablePop;
 
-
-
-    // Esto es el livedata
-    private MutableLiveData<List<MovieModel>> mMovies;// Clase necesaria para el viewmodel
-
-    private static MovieApiClient instancia;
 
     public static MovieApiClient getInstance(){
         if(instancia==null){
@@ -42,11 +43,17 @@ public class MovieApiClient {
 
     private MovieApiClient(){
         mMovies=new MutableLiveData<>();
+        mMoviesPop=new MutableLiveData<>();
     }
+
 
 
     public LiveData<List<MovieModel>> getMovies(){
         return mMovies;
+    }
+
+    public LiveData<List<MovieModel>> getMoviesPop(){
+        return mMoviesPop;
     }
 
 
@@ -74,6 +81,29 @@ public class MovieApiClient {
 
     }
 
+    //consumir api para popular
+    public void searchMoviesPop(int pageNumber){
+
+        if(retrieveMoviesRunnablePop != null){
+            retrieveMoviesRunnablePop = null;
+
+        }
+
+        retrieveMoviesRunnablePop = new RetrieveMoviesRunnablePop(pageNumber);
+
+
+
+        final Future myHandler2=AppExecutors.getInstance().networkIO().submit(retrieveMoviesRunnablePop);
+
+
+        AppExecutors.getInstance().networkIO().schedule(new Runnable() {
+            @Override
+            public void run() { // Aquí cancelamos la solicitud a la api según el tiempo de espera
+                myHandler2.cancel(true); // Cancela el handler
+            }
+        }, 30, TimeUnit.SECONDS); // Añadimos un timeout a la llamada de la api.
+
+    }
 
     // Obtención de datos de RestAPI con la siguiente clase ejecutable
     private class RetrieveMoviesRunnable implements Runnable{
@@ -141,6 +171,79 @@ public class MovieApiClient {
         // Pero permite parámetros personalizados
         private Call<MovieSearchResponse> getMovies(String query, int pageNumber){
             return Servicey.getMovieApi().searchMovie(Credentials.API_KEY,query,pageNumber);
+        }
+
+
+        private void cancelRequest(){
+            Log.v("Tag","La búsqueda se ha cancelado");
+            cancelRequest=true;
+        }
+    }
+
+    // Obtención de datos de RestAPI con la siguiente clase ejecutable para popular
+    private class RetrieveMoviesRunnablePop implements Runnable{
+
+        private int pageNumber;
+        boolean cancelRequest;
+
+        // El constructor de la clase
+        public RetrieveMoviesRunnablePop(int pageNumber){
+            this.pageNumber=pageNumber;
+            cancelRequest=false;
+        }
+
+        @Override
+        public void run() { // El método que otiene los objetos de la respuesta
+            try{
+                Response response2=getPop(pageNumber).execute();
+                Log.v("El response","El code es: "+response2.code());
+                if(cancelRequest){
+                    return;
+                }
+                if(response2.code()==200){ // Si la consumición de la api ha ido bien, guardamos las películas en la lista.
+                    List<MovieModel> list=new ArrayList<>(((MovieSearchResponse)response2.body()).getMovies());
+                    Log.v("Peliculas","Las peliculas son: "+response2.code());
+                    if(pageNumber==1){
+                        // Tendremos que enviar los datos al "Live Data"
+
+                        mMoviesPop.postValue(list); // Este método tardará un poco en publicar los datos en nuestro LiveData pero lo hará de manera asíncrona, por lo que no importa desde el hilo que se llame.
+                    } else{
+
+                        List<MovieModel> currentMovies = mMoviesPop.getValue();
+                        currentMovies.addAll(list);
+                        mMoviesPop.postValue(currentMovies);
+
+                    }
+
+
+                } else{ // Si no hay conexión o el response code no es 200 lanzamos error.
+
+                    String error =response2.errorBody().string();
+                    Log.v("Tag","Error"+error);
+                    mMoviesPop.postValue(null);
+
+                }
+
+
+
+            } catch (IOException e){
+                e.printStackTrace();
+                mMoviesPop.postValue(null);
+            }
+
+
+            if(cancelRequest){
+                Log.v("Tag","La búsqueda se ha cancelado");
+                return; // Si se ha cancelado la solicitud no hacer nada.
+            }
+        }
+
+
+        // Método para la búsqueda con query. Este método se encarga de llamar
+        // Similar a esta funcion:   Call<MovieSearchResponse> responseCall=movieApi.searchMovie(Credentials.API_KEY,"Jack Reacher",1);
+        // Pero permite parámetros personalizados
+        private Call<MovieSearchResponse> getPop(int pageNumber){
+            return Servicey.getMovieApi().getPopular(Credentials.API_KEY,pageNumber);
         }
 
 

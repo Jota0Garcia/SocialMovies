@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.aplicacion.ui.models.MovieModel;
 
-public class MovieDetails extends AppCompatActivity {
+public class MovieDetails extends AppCompatActivity  {
 
     private MovieModel movieModel;
 
@@ -42,7 +42,7 @@ public class MovieDetails extends AppCompatActivity {
             //Log.v("tagy", "incoming intent " + movieModel.getTitle());
             titleDetails.setText(movieModel.getTitle());
             descDetails.setText(movieModel.getMovie_overview());
-            ratingBarDetails.setRating(movieModel.getVote_average());
+            ratingBarDetails.setRating(movieModel.getVote_average()/2);
             Log.v("tagy", " " + movieModel.getMovie_overview());
             Glide.with(this)
                     .load("https://image.tmdb.org/t/p/w500/"
@@ -55,4 +55,5 @@ public class MovieDetails extends AppCompatActivity {
         }
 
     }
+
 }

@@ -26,6 +26,9 @@ public class MovieSearchResponse {
     public List<MovieModel> getMovies(){
         return movies;
     }
+    public List<MovieModel> getPop(){
+        return movies;
+    }
 
     @Override
     public String toString() {

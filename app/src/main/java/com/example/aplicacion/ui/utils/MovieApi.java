@@ -20,6 +20,19 @@ public interface MovieApi {
             @Query("page") int page
     );
 
+    //Busqueda por peliculas populares
+    //https://api.themoviedb.org/3/movie/popular ?api_key=52a18783ed514602a5facb15a0177e61&page=1
+    @GET("/3/movie/popular")
+    Call<MovieSearchResponse> getPopular(
+            @Query("api_key") String key,
+            @Query("page") int page
+    );
+
+
+
+
+
+
     // Búsqueda de películas por Id específico
     // Como es 1 sola se parametriza con la clase MovieModel, que es para un unico objeto.
     @GET("3/movie/{movie_id}?")
