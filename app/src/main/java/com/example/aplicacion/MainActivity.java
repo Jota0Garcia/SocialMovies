@@ -1,13 +1,8 @@
 package com.example.aplicacion;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -16,24 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.aplicacion.ui.models.MovieModel;
-import com.example.aplicacion.ui.request.Servicey;
-import com.example.aplicacion.ui.response.MovieSearchResponse;
-import com.example.aplicacion.ui.utils.Credentials;
-import com.example.aplicacion.ui.utils.MovieApi;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -69,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         btnGoogle=findViewById(R.id.btnGoogle);
         btnFacebook=findViewById(R.id.btnFacebook);
-
+/*
         Button btn=findViewById(R.id.buttonTest);
 
         btn.setOnClickListener(new View.OnClickListener(){
@@ -80,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
                 GetRetrofitResponse();
             }
         });
+
+ */
         createNewAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+/*
             //// ESTO ESTA AQUI DE PRUEBA SOLO
         btn=findViewById(R.id.buttonTest);
 
@@ -127,13 +114,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         ////////////
-
+*/
 
 
     }
 
     /////////// FUNCION SOLO DE PRUEBA
-
+/*
     private void GetRetrofitResponse() {
         MovieApi movieApi= Servicey.getMovieApi();
         Call<MovieSearchResponse> responseCall=movieApi.searchMovie(Credentials.API_KEY,"Action",1);
@@ -166,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     ///////////////////////////////////
-
+*/
 
 
     private void perforLogin() {

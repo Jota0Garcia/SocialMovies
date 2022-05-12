@@ -6,7 +6,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aplicacion.R;
@@ -15,7 +14,7 @@ public class MovieViewHolderBuscar extends RecyclerView.ViewHolder implements Vi
     TextView titleBuscar, release_dateBuscar, durationBuscar;
     ImageView imageViewBuscar;
     RatingBar ratingBarBuscar;
-    CardView cardViewBuscar;
+    //CardView cardViewBuscar;
 
     //Click listener
     OnMovieListener onMovieListenerBuscar;
@@ -24,7 +23,7 @@ public class MovieViewHolderBuscar extends RecyclerView.ViewHolder implements Vi
         super(itemView);
 
         this.onMovieListenerBuscar = onMovieListener;
-        cardViewBuscar=itemView.findViewById(R.id.card_viewBuscar);
+        //cardViewBuscar=itemView.findViewById(R.id.card_viewBuscar);
         titleBuscar =itemView.findViewById(R.id.movie_titleBuscar);
         release_dateBuscar = itemView.findViewById(R.id.movie_categoryBuscar);
         durationBuscar = itemView.findViewById(R.id.movie_durationBuscar);

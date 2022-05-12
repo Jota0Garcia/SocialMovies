@@ -37,13 +37,11 @@ public class HomeFragment extends Fragment implements OnMovieListener {
         View root = inflater.inflate(R.layout.fragment_home,container,false);
         recyclerView = (RecyclerView) root.findViewById(R.id.recyclerView);
 
-        //recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         movieListViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
         ConfigureRecyclerView();
         ObserveAnyChange();
         ObservePopularMovies();
-        //searchMovieApi("Fast", 1);
         //Para coger los datos de las peliculas populares
         movieListViewModel.searchMoviePop(1);
         return root;
@@ -54,6 +52,7 @@ public class HomeFragment extends Fragment implements OnMovieListener {
             if (movieModels != null) {
                 for (MovieModel movieModel : movieModels) {
                     //Log.v("Tag", "Han cambiado: " + movieModel.getTitle());
+                    recyclerView.clearOnScrollListeners();
                     movieRecyclerViewAdapter.setmMovies(movieModels);
                 }
             }
@@ -67,7 +66,7 @@ public class HomeFragment extends Fragment implements OnMovieListener {
             if(movieModels != null){
                 for(MovieModel movieModel: movieModels){
                     Log.v("Tag","Han cambiado: "+movieModel.getTitle());
-
+                    recyclerView.clearOnScrollListeners();
                     movieRecyclerViewAdapter.setmMovies(movieModels);
                 }
             }
@@ -117,26 +116,4 @@ public class HomeFragment extends Fragment implements OnMovieListener {
     public void onCategoryClick(String category) {
 
     }
-
-    /*
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        //View root = binding.getRoot();
-        //final RecyclerView recyclerView = binding.recyclerViewNew;
-        //(dashboardViewModel).observe(getViewLifecycleOwner(),recyclerView::setAdapter);
-        //final TextView textView = binding.textDashboard;
-        //dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        //recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewNew);
-        recyclerView = binding.recyclerViewNew;
-        //recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        movieListViewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
-
-        ConfigureRecyclerView();
-        ObserveAnyChange();
-        searchMovieApi("fast", 1);
-
-    }
-
- */
 }
