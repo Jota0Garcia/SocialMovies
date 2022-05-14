@@ -52,5 +52,13 @@ public class MovieRepository {
         searchMovieApi(mQuery, mPageNumber+1);
     }
 
+    public void searchNextPagePop(){
+        searchMoviePop(mPageNumber+1);
+    }
+
+    public int getmPageNumber(){
+        return mPageNumber;
+    }
+
 
 }

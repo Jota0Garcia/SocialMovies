@@ -2,7 +2,6 @@ package com.example.aplicacion.ui.dashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +44,7 @@ public class DashboardFragment extends Fragment implements OnMovieListener {
         movieListViewModelBuscar = new ViewModelProvider(this).get(DashboardViewModel.class);
         ConfigureRecyclerView();
         ObserveAnyChange();
-        ObservePopularMovies();
+        //ObservePopularMovies();
 
         return root;
     }
@@ -55,6 +54,7 @@ public class DashboardFragment extends Fragment implements OnMovieListener {
             if (movieModels != null) {
                 for (MovieModel movieModel : movieModels) {
                     //Log.v("Tag", "Han cambiado: " + movieModel.getTitle());
+                    //recyclerViewBuscar.clearOnScrollListeners();
                     movieRecyclerViewAdapterBuscar.setmMovies(movieModels);
                 }
             }
@@ -98,8 +98,8 @@ public class DashboardFragment extends Fragment implements OnMovieListener {
         movieListViewModelBuscar.getMovies().observe(getViewLifecycleOwner(), movieModels -> {
             if(movieModels != null){
                 for(MovieModel movieModel: movieModels){
-                    Log.v("Tag","Han cambiado: "+movieModel.getTitle());
-                    recyclerViewBuscar.clearOnScrollListeners();
+                    //Log.v("Tag","Han cambiado: "+movieModel.getTitle());
+                    //recyclerViewBuscar.clearOnScrollListeners();
                     movieRecyclerViewAdapterBuscar.setmMovies(movieModels);
                 }
             }
@@ -126,7 +126,7 @@ public class DashboardFragment extends Fragment implements OnMovieListener {
         recyclerViewBuscar.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                if (!recyclerView.canScrollVertically(1)){
+                if (!recyclerView.canScrollHorizontally(1)){
                     // Aqui mostramos los proximos resultados para la proxima pagina
                     movieListViewModelBuscar.searchNextPage();
                 }

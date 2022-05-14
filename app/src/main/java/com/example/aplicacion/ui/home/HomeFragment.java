@@ -26,7 +26,7 @@ public class HomeFragment extends Fragment implements OnMovieListener {
     private HomeViewModel movieListViewModel;
     private RecyclerView recyclerView;
     private MovieRecyclerView movieRecyclerViewAdapter;
-    boolean isPopular = true;
+    private int pageNumber=1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -40,10 +40,11 @@ public class HomeFragment extends Fragment implements OnMovieListener {
         movieListViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
 
         ConfigureRecyclerView();
-        ObserveAnyChange();
+        //ObserveAnyChange();
         ObservePopularMovies();
         //Para coger los datos de las peliculas populares
-        movieListViewModel.searchMoviePop(1);
+
+        movieListViewModel.searchMoviePop(homeViewModel.getNumPage()+1);
         return root;
     }
 
@@ -52,7 +53,7 @@ public class HomeFragment extends Fragment implements OnMovieListener {
             if (movieModels != null) {
                 for (MovieModel movieModel : movieModels) {
                     //Log.v("Tag", "Han cambiado: " + movieModel.getTitle());
-                    recyclerView.clearOnScrollListeners();
+                    //recyclerView.clearOnScrollListeners();
                     movieRecyclerViewAdapter.setmMovies(movieModels);
                 }
             }
@@ -66,7 +67,7 @@ public class HomeFragment extends Fragment implements OnMovieListener {
             if(movieModels != null){
                 for(MovieModel movieModel: movieModels){
                     Log.v("Tag","Han cambiado: "+movieModel.getTitle());
-                    recyclerView.clearOnScrollListeners();
+                    //recyclerView.clearOnScrollListeners();
                     movieRecyclerViewAdapter.setmMovies(movieModels);
                 }
             }
@@ -91,9 +92,9 @@ public class HomeFragment extends Fragment implements OnMovieListener {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                if (!recyclerView.canScrollVertically(1)){
+                if (!recyclerView.canScrollHorizontally(1)){
                     // Aqui mostramos los proximos resultados para la proxima pagina
-                    movieListViewModel.searchNextPage();
+                    movieListViewModel.searchNextPagePop();
                 }
             }
         }

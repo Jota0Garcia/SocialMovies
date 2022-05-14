@@ -34,8 +34,10 @@ public class HomeViewModel extends ViewModel {
     public void searchMoviePop(int pageNumber) {
         movieRepository.searchMoviePop(pageNumber);
     }
-    public void searchNextPage() {
-        movieRepository.searchNextPage();
-
+    public void searchNextPagePop() {
+        movieRepository.searchNextPagePop();
+    }
+    public int getNumPage(){
+        return movieRepository.getmPageNumber();
     }
 }
