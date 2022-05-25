@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     String validEmails = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
             + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
     ProgressDialog progressDialog;
-    TextView createNewAccount;
+    TextView createNewAccount, forgotPassword;
     ImageView btnGoogle;
     ImageView btnFacebook;
 
@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         btnGoogle=findViewById(R.id.btnGoogle);
         btnFacebook=findViewById(R.id.btnFacebook);
+        forgotPassword = findViewById(R.id.forgotPassword);
 /*
         Button btn=findViewById(R.id.buttonTest);
 
@@ -74,6 +75,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, RestablecerPass.class));
+            }
+        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -90,7 +90,6 @@ public class DashboardFragment extends Fragment implements OnMovieListener {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        com.example.aplicacion.databinding.FragmentDashboardBinding binding = null;
     }
     // Func para detectar cambios
     private void ObserveAnyChange(){

@@ -21,4 +21,11 @@
     <string name="fb_login_protocol_scheme">fb2015319155316055</string>
     <string name="facebook_client_token">3d07402e14f2d891232bd4dbe59723fe</string>
     <string name="tituloPopular">Peliculas populares</string>
+    <string name="nombre">"Nombre: "</string>
+    <string name="correov">"Correo: "</string>
+    <string name="edad">"Edad: "</string>
+    <string name="apellidos">"Apellidos: "</string>
+    <string name="actualizar">Actualizar datos</string>
+    <string name="cambiarpas">actualizar contraseña</string>
+    <string name="title_perfil">Perfil</string>
 </resources>

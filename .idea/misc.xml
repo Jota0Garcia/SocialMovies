@@ -22,6 +22,7 @@
         <entry key="..\:/Users/zzale/AndroidStudioProjects/SocialMovies/app/src/main/res/drawable/btn_style.xml" value="0.1045" />
         <entry key="..\:/Users/zzale/AndroidStudioProjects/SocialMovies/app/src/main/res/drawable/edt_style.xml" value="0.1045" />
         <entry key="..\:/Users/zzale/AndroidStudioProjects/SocialMovies/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/drawable/btn_style.xml" value="0.323" />
         <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/drawable/shadow_back.xml" value="0.1675" />
         <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/activity_buscar.xml" value="0.358695652173913" />
         <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/activity_google_sign_in.xml" value="0.18802083333333333" />
@@ -30,12 +31,14 @@
         <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/activity_main_bottom_nav.xml" value="0.358695652173913" />
         <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/activity_movie_details.xml" value="0.33" />
         <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/activity_movie_details_popular.xml" value="0.3625" />
+        <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/activity_registrarse.xml" value="0.3625" />
+        <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/activity_restablecer_pass.xml" value="0.3625" />
         <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/fragment_buscar.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/fragment_config.xml" value="0.358695652173913" />
         <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/fragment_dashboard.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/fragment_filtro.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/fragment_home.xml" value="0.22" />
-        <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/fragment_notifications.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/fragment_notifications.xml" value="0.33" />
         <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/movie_list_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/movie_list_item_buscar.xml" value="0.23822463768115942" />
         <entry key="..\:/Users/zzale/StudioProjects/SocialMovies2/app/src/main/res/layout/popular_movies_layout.xml" value="0.3625" />

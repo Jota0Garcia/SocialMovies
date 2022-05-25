@@ -23,9 +23,4 @@
         android:label="@string/title_social"
         tools:layout="@layout/fragment_notifications" />
 
-    <fragment
-        android:id="@+id/navigation_config"
-        android:name="com.example.aplicacion.ui.config.ConfigFragment"
-        android:label="@string/title_config"
-        tools:layout="@layout/fragment_config" />
 </navigation>

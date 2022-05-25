@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Aplicacion">
         <activity
+            android:name=".RestablecerPass"
+            android:exported="false" />
+        <activity
             android:name=".MovieDetails"
             android:exported="false" />
         <activity
