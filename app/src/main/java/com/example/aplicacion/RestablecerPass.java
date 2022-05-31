@@ -40,7 +40,7 @@ public class RestablecerPass extends AppCompatActivity {
             public void onClick(View view) {
                 emailCamPass = editTextEmail.getText().toString();
                 if(!emailCamPass.isEmpty()){
-                    progressDialog.setMessage("Espero un momento...");
+                    progressDialog.setMessage("Espere un momento...");
                     progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.show();
                     resetPassword();

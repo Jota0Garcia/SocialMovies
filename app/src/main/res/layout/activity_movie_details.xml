@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:windowSoftInputMode="adjustResize"
     tools:context=".MovieDetails">
 
     <ImageView
@@ -24,7 +25,8 @@
         android:background="@drawable/shadow_back"
         app:layout_constraintBottom_toBottomOf="@id/imageViewdetails"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="parent">
+        app:layout_constraintEnd_toStartOf="parent"
+        android:windowSoftInputMode="adjustResize">
 
         <TextView
             android:id="@+id/textViewtitledetails"

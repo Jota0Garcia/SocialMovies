@@ -183,6 +183,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
+
+
                         progressDialog.dismiss();
                         sendUserToNextActivity();
                         Toast.makeText(MainActivity.this, "Login completado", Toast.LENGTH_SHORT).show();

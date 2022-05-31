@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/popcorn"
     android:orientation="vertical"
+    android:windowSoftInputMode="adjustPan"
     tools:context=".MainActivity">
 
 

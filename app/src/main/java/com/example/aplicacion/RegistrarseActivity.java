@@ -1,12 +1,8 @@
 package com.example.aplicacion;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -14,16 +10,25 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegistrarseActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     FirebaseUser mUser;
+    DatabaseReference databaseReference;
 
     TextView alreadyHaveAccount;
     EditText inputEmail,inputPassword,inputConfirmPassword;
@@ -39,6 +44,7 @@ public class RegistrarseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registrarse);
         mAuth = FirebaseAuth.getInstance();
         mUser=mAuth.getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance("https://socialmovie-7c309-default-rtdb.europe-west1.firebasedatabase.app").getReference();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
@@ -91,9 +97,30 @@ public class RegistrarseActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        progressDialog.dismiss();
-                        sendUserToNextActivity();
-                        Toast.makeText(RegistrarseActivity.this,"Registro completado",Toast.LENGTH_SHORT).show();
+                        Map<String,Object> map = new HashMap<>();
+                        map.put("nombre","nombre");
+                        map.put("apellidos","apellidos");
+                        map.put("correo",email);
+                        map.put("edad","edad");
+
+                        String id = mAuth.getCurrentUser().getUid();
+                        //databaseReference = FirebaseDatabase.getInstance().getReference();
+                        databaseReference.child("Usesrs").child(id).setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task2) {
+                                if(task2.isSuccessful()){
+                                    progressDialog.dismiss();
+                                    sendUserToNextActivity();
+                                    Toast.makeText(RegistrarseActivity.this,"Registro completado",Toast.LENGTH_SHORT).show();
+                                }else{
+                                    progressDialog.dismiss();
+                                    Toast.makeText(RegistrarseActivity.this,""+task.getException(),Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+
+
+
                     }else{
                         progressDialog.dismiss();
                         Toast.makeText(RegistrarseActivity.this,""+task.getException(),Toast.LENGTH_SHORT).show();
